@@ -4,7 +4,6 @@ const db = require('../../models')
 const Todo = db.Todo
 
 router.get('/new', (req, res) => {
-  console.log(req.user.id)
   return res.render('new')
 })
 
@@ -16,11 +15,10 @@ router.get('/:id', (req, res) => {
 })
 
 router.get('/:id/edit', (req, res) => {
-  const userId = req.user._id
-  const _id = req.params.id
-  return Todo.findOne({ _id, userId })
-    .lean()
-    .then((todo) => res.render('edit', { todo }))
+  const UserId = req.user.id
+  const id = req.params.id
+  return Todo.findOne({ where: { id, UserId } })
+    .then(todo => res.render('edit', { todo: todo.get() }))
     .catch(error => console.log(error))
 })
 
@@ -33,16 +31,16 @@ router.post('/', (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
-  const userId = req.user._id
-  const _id = req.params.id
+  const UserId = req.user.id
+  const id = req.params.id
   const { name, isDone } = req.body
-  return Todo.findOne({ _id, userId })
+  return Todo.findOne({ where: { id, UserId } })
     .then(todo => {
       todo.name = name
       todo.isDone = isDone === 'on'
       return todo.save()
     })
-    .then(() => res.redirect(`/todos/${_id}`))
+    .then(() => res.redirect(`/todos/${id}`))
     .catch(error => console.log(error))
 })
 
