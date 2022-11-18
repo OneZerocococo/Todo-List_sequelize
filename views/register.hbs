@@ -1,0 +1,38 @@
+<div class="row mt-5">
+  <div class="col-md-6 m-auto">
+    <div class="card card-body">
+      <h1 class="text-center mt-3">Register</h1>
+      {{!-- {{> message}} --}}
+      <form action="/users/register" method="POST">
+        <div class="form-group">
+          <label for="name" class="my-2"><b>Name</b></label>
+          <input type="text" id="name" name="name" class="form-control" placeholder="Enter Name" value="{{ name }}">
+        </div>
+        <div class="form-group">
+          <label for="email" class="my-2"><b>Email</b></label>
+          <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email"
+            value="{{ email }}">
+        </div>
+        <div class="form-group">
+          <label for="password" class="my-2"><b>Password</b></label>
+          <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password"
+            value="{{ password }}">
+        </div>
+        <div class="form-group">
+          <label for="password" class="my-2"><b>Confirm Password</b></label>
+          <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
+            placeholder="Confirm Password" value="{{ confirmPassword }}">
+        </div>
+        <div class="d-grid">
+          <button type="submit" class="btn btn-warning btn-block mt-3">Register</button>
+        </div>
+        <div class="d-grid my-1">
+          <a href="/auth/facebook" class="btn btn-primary btn-block">Facebook Login</a>
+        </div>
+      </form>
+      <p class="lead mt-4">
+        Have an Account? <a href="/users/login">Login</a>
+      </p>
+    </div>
+  </div>
+</div>
